@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const defaultPage = process.env.DEFAULT_PAGE || 'pages/work.html';
+
 const {
 	app,
 	BrowserWindow,
@@ -27,7 +31,7 @@ function createWindow() {
 	});
 
 	// and load the index.html of the app.
-	win.loadFile('pages/index.html');
+	win.loadFile(defaultPage);
 
 	// Open the DevTools.
 	// win.webContents.openDevTools()
