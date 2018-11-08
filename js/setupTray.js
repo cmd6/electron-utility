@@ -1,27 +1,31 @@
 const {
 	Menu,
-	Tray
+	Tray,
+	app,
 } = require('electron');
 const path = require('path');
 
-let appIcon = null;
-
 module.exports = function setupTray() {
-	appIcon = new Tray(path.resolve(__dirname, '../assets/mozilla_favicon.ico'));
-	const contextMenu = Menu.buildFromTemplate([{
-			label: 'Item1',
-			type: 'radio'
-		},
-		{
-			label: 'Item2',
-			type: 'radio'
-		}
-	]);
-
-	// Make a change to the context menu
-	contextMenu.items[1].checked = false;
+	const trayIcon = new Tray(path.resolve(__dirname, '../assets/mozilla_favicon.ico'));
+	trayIcon.setTitle('Toolbox');
+	const contextMenu = Menu.buildFromTemplate(
+		[
+			{
+				label: 'Show Window',
+				type: 'normal',
+				click: () => app.emit('activate'),
+			},
+			{
+				label: 'Quit',
+				type: 'normal',
+				click: () => app.quit(),
+			},
+		]);
 
 	// Call this again for Linux because we modified the context menu
-	appIcon.setContextMenu(contextMenu);
+	trayIcon.setContextMenu(contextMenu);
+	trayIcon.on('click', () => app.emit('activate'));
+
+	return trayIcon;
 
 }

@@ -15,7 +15,7 @@ window.jQuery = window.$ = require('jquery');
 	};
 
 	const paths = {
-		utility: 'C:\\Projects\\Electron\\Utility\\resources\\app',
+		toolbox: 'C:\\Projects\\Electron\\Toolbox\\resources\\app',
 		projects: 'C:\\Projects',
 		kids: 'C:\\Work\\kids',
 		kidsapi: 'C:\\Work\\kidsapi',
