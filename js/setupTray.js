@@ -16,15 +16,32 @@ module.exports = function setupTray() {
 				click: () => app.emit('activate'),
 			},
 			{
-				label: 'Quit',
+				label: 'Minimize Window',
+				type: 'normal',
+				click: () => app.emit('mainWindow-minimize'),
+				accelerator: 'CommandOrControl+M'
+			},
+			{
+				label: 'Close Window',
+				type: 'normal',
+				click: () => app.emit('mainWindow-close'),
+				accelerator: 'CommandOrControl+W'
+			},
+			{
+				type: 'separator'
+			},
+			{
+				label: 'Quit Toolbox',
 				type: 'normal',
 				click: () => app.quit(),
+				accelerator: 'CommandOrControl+Q'
 			},
 		]);
 
 	// Call this again for Linux because we modified the context menu
 	trayIcon.setContextMenu(contextMenu);
-	trayIcon.on('click', () => app.emit('activate'));
+	trayIcon.on('click', () => trayIcon.popUpContextMenu());
+	// trayIcon.on('click', () => app.emit('activate'));
 
 	return trayIcon;
 

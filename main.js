@@ -66,13 +66,13 @@ if (!firstInstance) {
 	app.on('ready', setup);
 
 	// Quit when all windows are closed.
-	app.on('window-all-closed', () => {
-		// On macOS it is common for applications and their menu bar
-		// to stay active until the user quits explicitly with Cmd + Q
-		// if (process.platform !== 'darwin') {
-		// 	app.quit();
-		// }
-	});
+	// app.on('window-all-closed', () => {
+	// 	// On macOS it is common for applications and their menu bar
+	// 	// to stay active until the user quits explicitly with Cmd + Q
+	// 	// if (process.platform !== 'darwin') {
+	// 	// 	app.quit();
+	// 	// }
+	// });
 
 	app.on('activate', () => {
 		// On macOS it's common to re-create a window in the app when the
@@ -81,6 +81,19 @@ if (!firstInstance) {
 			createWindow();
 		} else {
 			windows.main.focus();
+		}
+	});
+
+	app.on('mainWindow-minimize', () => {
+		if (windows.main === null) {
+			createWindow();
+		}
+		windows.main.minimize();
+	});
+
+	app.on('mainWindow-close', () => {
+		if (windows.main !== null) {
+			windows.main.close();
 		}
 	});
 
