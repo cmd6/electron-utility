@@ -6,7 +6,7 @@ const {
 const path = require('path');
 
 module.exports = function setupTray() {
-	const trayIcon = new Tray(path.resolve(__dirname, '../assets/mozilla_favicon.ico'));
+	const trayIcon = new Tray(path.resolve(__dirname, '../assets/gear.ico'));
 	trayIcon.setTitle('Toolbox');
 	const contextMenu = Menu.buildFromTemplate(
 		[
