@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const rootFolder = 'C:\\tfs';
+const fileExtension = '.txt';
 
 class PathNode {
 	constructor(fullPath, name, parent) {
@@ -15,7 +16,7 @@ class PathNode {
 			const fullFilePath = fullPath + '\\' + file;
 			if (fs.lstatSync(fullFilePath).isDirectory()) {
 				this.subs.push(new PathNode(fullFilePath, file, this));
-			} else if (file.endsWith('.txt')) {
+			} else if (file.endsWith(fileExtension)) {
 				this.files.push(file);
 			}
 		});
@@ -102,14 +103,4 @@ branchMap.forEach(val => {
 
 });
 
-console.log(projects);
-
-projectMap.forEach((projects, key) => {
-	console.log(key, projects.length);
-	projects.forEach(program => {
-		console.log(program[0].filename, program.length);
-		program.forEach(branch => console.log(branch.fullPath));
-	});
-});
-
-console.log(unbranched);
+module.exports = {unbranched, projectMap};
