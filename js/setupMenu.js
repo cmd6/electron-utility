@@ -72,6 +72,10 @@ const template = [{
 			},
 			{
 				role: 'close'
+			},
+			{
+				role: 'quit',
+				accelerator: 'CommandOrControl+Q'
 			}
 		]
 	},

@@ -31,7 +31,7 @@ module.exports = function setupTray() {
 				type: 'separator'
 			},
 			{
-				label: 'Quit Toolbox',
+				label: 'Exit Toolbox',
 				type: 'normal',
 				click: () => app.quit(),
 				accelerator: 'CommandOrControl+Q'
