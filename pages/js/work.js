@@ -32,7 +32,7 @@ window.jQuery = window.$ = require('jquery');
 	};
 
 	const timer = new Date();
-	const worker = new Worker('./js/workers/work.js');
+	const worker = new Worker('./js/workers/workWorker.js');
 	worker.onmessage = function handleWorkerMessage(ev) {
 		console.log(ev);
 		if (ev.data.command === 'getProjectTree') {
