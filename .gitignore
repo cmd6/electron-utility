@@ -1,5 +1,7 @@
 storage/*
-test.js
+*.cmd
+
+localtests/
 
 # Logs
 logs

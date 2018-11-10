@@ -16,7 +16,7 @@ const getProjectTree = function getProjectTree() {
 		'MobileApplications',
 		'Training',
 		'ConsolePrograms',
-		'Login',
+		// 'Login',
 		'StaticFiles',
 		'Images',
 		'ImagesCSS',

@@ -28,7 +28,7 @@ function runGetProjectTree() {
 					projectMap: projectMap,
 				},
 			});
-			return;
+			//return;
 		}
 	} catch (err) {
 
