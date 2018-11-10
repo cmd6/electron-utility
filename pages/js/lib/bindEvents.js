@@ -10,8 +10,8 @@ function getFunctions(attributeValue) {
 	return eachArray;
 }
 
-const bindEvents = function bindEvents(eventFunctions, errorOnMissingFunction = true) {
-	document.querySelectorAll('[data-function]').forEach(element => {
+const bindEvents = function bindEvents(context, eventFunctions, errorOnMissingFunction = true) {
+	context.querySelectorAll('[data-function]').forEach(element => {
 		const functionAttrVal = element.getAttribute('data-function');
 		const bindings = getFunctions(functionAttrVal);
 		bindings.forEach(binding => {

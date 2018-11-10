@@ -11,21 +11,22 @@ module.exports = function setupTray() {
 	const contextMenu = Menu.buildFromTemplate(
 		[
 			{
-				label: 'Show Window',
+				label: 'Toggle Window',
 				type: 'normal',
 				click: () => app.emit('activate'),
+				accelerator: 'CommandOrControl+Shift+T'
 			},
 			{
 				label: 'Minimize Window',
 				type: 'normal',
 				click: () => app.emit('mainWindow-minimize'),
-				accelerator: 'CommandOrControl+M'
+				accelerator: 'CommandOrControl+Shift+M'
 			},
 			{
 				label: 'Close Window',
 				type: 'normal',
 				click: () => app.emit('mainWindow-close'),
-				accelerator: 'CommandOrControl+W'
+				accelerator: 'CommandOrControl+Shift+W'
 			},
 			{
 				type: 'separator'
@@ -34,7 +35,7 @@ module.exports = function setupTray() {
 				label: 'Exit Toolbox',
 				type: 'normal',
 				click: () => app.quit(),
-				accelerator: 'CommandOrControl+Q'
+				accelerator: 'CommandOrControl+Shift+Q'
 			},
 		]);
 

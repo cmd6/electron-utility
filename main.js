@@ -1,7 +1,3 @@
-require('dotenv').config();
-
-const defaultPage = process.env.DEFAULT_PAGE || 'pages/work.html';
-
 const {
 	app,
 	BrowserWindow,
@@ -30,11 +26,13 @@ if (!firstInstance) {
 		}
 	})
 	const setupTray = require('./js/setupTray');
-
 	let trayIcon;
 
 	function setup() {
-		globalShortcut.register('CommandOrControl+Q', () => windows.main ? app.quit() : null);
+		globalShortcut.register('CmdOrCtrl+Shift+Q', () => app.quit());
+		globalShortcut.register('CmdOrCtrl+Shift+W', () => app.emit('mainWindow-close'));
+		globalShortcut.register('CmdOrCtrl+Shift+M', () => app.emit('mainWindow-minimize'));
+		globalShortcut.register('CmdOrCtrl+Shift+T', () => windows.main && windows.main.isFocused() ? windows.main.close() : app.emit('activate'));
 		trayIcon = setupTray();
 		createWindow();
 	}
@@ -44,12 +42,16 @@ if (!firstInstance) {
 		// Create the browser window.
 		windows.main = new BrowserWindow({
 			width: 800,
-			height: 600
+			height: 600,
+			webPreferences: {
+				nodeIntegrationInWorker: true
+			}
 		});
 
-		// and load the index.html of the app.
-		windows.main.loadFile(defaultPage);
+		windows.main.maximize();
 
+		// and load the index.html of the app.
+		windows.main.loadFile('./pages/work.html');
 		// Open the DevTools.
 		// windows.main.webContents.openDevTools()
 
@@ -60,6 +62,7 @@ if (!firstInstance) {
 			// when you should delete the corresponding element.
 			windows.main = null;
 		});
+
 	}
 
 	// This method will be called when Electron has finished
@@ -88,9 +91,12 @@ if (!firstInstance) {
 
 	app.on('mainWindow-minimize', () => {
 		if (windows.main === null) {
-			createWindow();
+			app.emit('activate');
+		}else if (windows.main.isMinimized()){
+			windows.main.restore();
+		}else{
+			windows.main.minimize();
 		}
-		windows.main.minimize();
 	});
 
 	app.on('mainWindow-close', () => {
@@ -103,5 +109,4 @@ if (!firstInstance) {
 	// code. You can also put them in separate files and require them here.
 
 	require('./js/setupMenu');
-
 }
