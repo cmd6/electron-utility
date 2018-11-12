@@ -8,6 +8,7 @@ const path = require('path');
 module.exports = function setupTray() {
 	const trayIcon = new Tray(path.resolve(__dirname, '../assets/gear.ico'));
 	trayIcon.setTitle('Toolbox');
+	trayIcon.setToolTip('Toolbox');
 	const contextMenu = Menu.buildFromTemplate(
 		[
 			{
@@ -39,7 +40,6 @@ module.exports = function setupTray() {
 			},
 		]);
 
-	// Call this again for Linux because we modified the context menu
 	trayIcon.setContextMenu(contextMenu);
 	trayIcon.on('click', () => trayIcon.popUpContextMenu());
 	// trayIcon.on('click', () => app.emit('activate'));

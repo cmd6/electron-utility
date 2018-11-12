@@ -26,14 +26,18 @@ if (!firstInstance) {
 		}
 	})
 	const setupTray = require('./js/setupTray');
-	let trayIcon;
+	const setupHostsTray = require('./js/setupHostsTray');
+	let mainTray;
+	let hostsTray;
 
 	function setup() {
+		app.setName('Toolbox');
 		globalShortcut.register('CmdOrCtrl+Shift+Q', () => app.quit());
 		globalShortcut.register('CmdOrCtrl+Shift+W', () => app.emit('mainWindow-close'));
 		globalShortcut.register('CmdOrCtrl+Shift+M', () => app.emit('mainWindow-minimize'));
 		globalShortcut.register('CmdOrCtrl+Shift+T', () => windows.main && windows.main.isFocused() ? windows.main.close() : app.emit('activate'));
-		trayIcon = setupTray();
+		mainTray = setupTray();
+		hostsTray = setupHostsTray();
 		createWindow();
 	}
 
